@@ -62,6 +62,11 @@ const app = Vue.createApp( {
 
     selectEventType(index) { this.selectedEventType = this.eventTypes[index] },
 
+    closeEventType() { 
+      this.selectedEventType = null
+      this.availableEvent = false
+    },
+
     getFullAddress(buffet) {
       return `${buffet.address} - ${buffet.district}, ${buffet.city} - 
               ${buffet.state}, ${buffet.cep.substring(0, 5)}-

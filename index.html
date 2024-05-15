@@ -2,6 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>Cadê Buffet</title>
 </head>
 <body>
@@ -45,8 +46,10 @@
       <p>Mínimo de convidados: {{ selectedEventType.minimum_attendees }}</p>
       <p>Máximo de convidados: {{ selectedEventType.maximum_attendees }}</p>
       <p>Duração: {{ selectedEventType.duration }} minutos</p>
+
       <h3>Cardápio</h3>
       <p>{{ selectedEventType.menu }}</p>
+
       <h3>Opções Adicionais</h3>
       <p>Fornece Bebidas Alcoólicas: {{ zeroOneToText(selectedEventType.provides_alcohol_drinks) }}</p>
       <p>Fornece Decoração: {{ zeroOneToText(selectedEventType.provides_decoration) }}</p>
@@ -56,6 +59,7 @@
       <input type="date" datemin="" v-model="dateField" placeholder="Data de realização">
       <input type="number" min="1" step="1" v-model="attendeeQuantityField" placeholder="Quantidade de convidados">
       <button v-on:click="checkEventAvailability()">Consultar Disponibilidade do Evento</button>
+
       <div v-if="availableEvent == true">
         <p>O tipo de evento está disponível para esta data!</p>
         <h3>Confira os Preços Prévios!</h3>
@@ -65,7 +69,7 @@
         </dl>
       </div>
 
-      <button v-on:click="selectedEventType = null">Voltar Para o Buffet</button>
+      <button v-on:click="closeEventType()">Voltar Para o Buffet</button>
     </div>
   </div>
 
