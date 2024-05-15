@@ -7,18 +7,20 @@
 <body>
   <div id="app">
     <h1>Cadê Buffet</h1>
+      <h2>Catálogo de Buffets</h2>
 
-    <h2>Catálogo de Buffets</h2>
-    <p v-if="buffets.length <= 0">Nenhum Buffet encontrado!</p>
-
-    <dl v-for="buffet, index in buffets">
-      <dt>{{ buffet.brand_name }}</dt>
-      <dd>{{ buffet.description }}</dd>
-      <dd>{{ formatPhone(buffet.phone) }}</dd>
-      <dd>{{ getFullAddress(buffet) }}</dd>
-    </dl>
-  </div>
-
+      <input type="text" v-model="query" placeholder="Digite o nome do Buffet para buscar">
+  
+      <p v-if="buffets.length <= 0">Nenhum Buffet encontrado!</p>
+  
+      <dl v-for="buffet, index in filteredBuffets">
+        <dt>{{ buffet.brand_name }}</dt>
+        <dd>{{ buffet.description }}</dd>
+        <dd>{{ formatPhone(buffet.phone) }}</dd>
+        <dd>{{ getFullAddress(buffet) }}</dd>
+      </dl>
+    </div>
+    
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="main.js"></script>
 </body>

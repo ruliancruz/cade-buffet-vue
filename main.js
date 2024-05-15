@@ -1,8 +1,21 @@
 const API_URL = "http://localhost:3000/api/v1"
 
 const app = Vue.createApp( {
-  data() { return { buffets: [] } },
+  data() { return { query: '', buffets: [] } },
   mounted() { this.fetchBuffets() },
+
+  computed: { 
+    filteredBuffets() {
+      if(this.query) {
+        return this.buffets.filter(buffet => {
+          return buffet.brand_name.toLowerCase()
+            .includes(this.query.toLowerCase())
+        })
+      }
+
+      return this.buffets
+    }
+  },
 
   methods: {
     async fetchBuffets() {
@@ -11,7 +24,8 @@ const app = Vue.createApp( {
 
     getFullAddress(buffet) {
       return `${buffet.address} - ${buffet.district}, ${buffet.city} - 
-        ${buffet.state}, ${buffet.cep.substring(0, 5)}-${buffet.cep.substring(5)}`
+              ${buffet.state}, ${buffet.cep.substring(0, 5)}-
+              ${buffet.cep.substring(5)}`
     },
 
     formatPhone(phone) {
