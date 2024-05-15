@@ -11,7 +11,7 @@
     <div v-if="selectedBuffet == null">
       <h2>Catálogo de Buffets</h2>
 
-      <input type="text" v-model="query" placeholder="Digite o nome do Buffet para buscar">
+      <input type="text" v-model="buffetQuery" placeholder="Digite o nome do Buffet para buscar">
       <p v-if="buffets.length <= 0">Nenhum Buffet encontrado!</p>
 
       <dl v-for="buffet, index in filteredBuffets">
@@ -52,6 +52,18 @@
       <p>Fornece Decoração: {{ zeroOneToText(selectedEventType.provides_decoration) }}</p>
       <p>Fornece Serviço de Estacionamento: {{ zeroOneToText(selectedEventType.provides_parking_service) }}</p>
       <p>Atende a Endereço Indicado por Cliente: {{ zeroOneToText(selectedEventType.serves_external_address) }}</p>
+
+      <input type="date" datemin="" v-model="dateField" placeholder="Data de realização">
+      <input type="number" min="1" step="1" v-model="attendeeQuantityField" placeholder="Quantidade de convidados">
+      <button v-on:click="checkEventAvailability()">Consultar Disponibilidade do Evento</button>
+      <div v-if="availableEvent == true">
+        <p>O tipo de evento está disponível para esta data!</p>
+        <h3>Confira os Preços Prévios!</h3>
+        <dl v-for="price in prices">
+          <dt>{{ price.description }}</dt>
+          <dd>R${{ formatPrice(price.value) }}</dd>
+        </dl>
+      </div>
 
       <button v-on:click="selectedEventType = null">Voltar Para o Buffet</button>
     </div>
