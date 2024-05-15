@@ -1,7 +1,7 @@
 const API_URL = "http://localhost:3000/api/v1"
 
 const app = Vue.createApp( {
-  data() { return { query: '', buffets: [] } },
+  data() { return { query: '', buffets: [], selectedBuffet: null } },
   mounted() { this.fetchBuffets() },
 
   computed: { 
@@ -35,6 +35,10 @@ const app = Vue.createApp( {
 
       return `(${phone.slice(0, 2)}) ${phone.slice(2, 6)}-${phone.slice(6, 10)}`
     },
+
+    selectBuffet(index) {
+      this.selectedBuffet = this.buffets[index]
+    }
   }
 })
 

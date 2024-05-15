@@ -7,20 +7,30 @@
 <body>
   <div id="app">
     <h1>Cadê Buffet</h1>
+    
+    <div v-if="selectedBuffet == null">
       <h2>Catálogo de Buffets</h2>
 
       <input type="text" v-model="query" placeholder="Digite o nome do Buffet para buscar">
-  
+
       <p v-if="buffets.length <= 0">Nenhum Buffet encontrado!</p>
-  
+
       <dl v-for="buffet, index in filteredBuffets">
-        <dt>{{ buffet.brand_name }}</dt>
+        <dt><button v-on:click="selectBuffet(index)">{{ buffet.brand_name }}</button></dt>
+        <dd>{{ buffet.city }} - {{ buffet.state }}</dd>
         <dd>{{ buffet.description }}</dd>
-        <dd>{{ formatPhone(buffet.phone) }}</dd>
-        <dd>{{ getFullAddress(buffet) }}</dd>
       </dl>
     </div>
     
+    <div v-else>
+      <h2>{{ selectedBuffet.brand_name }}</button></h2>
+      <p>{{ selectedBuffet.description }}</p>
+      <p>Telefone: {{ formatPhone(selectedBuffet.phone) }}</p>
+      <p>Endereço: {{ getFullAddress(selectedBuffet) }}</p>
+      <button v-on:click="selectBuffet(null)">Voltar Para a Tela Inicial</button>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="main.js"></script>
 </body>
