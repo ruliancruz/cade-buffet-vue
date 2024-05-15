@@ -1,7 +1,16 @@
 const API_URL = "http://localhost:3000/api/v1"
 
 const app = Vue.createApp( {
-  data() { return { query: '', buffets: [], selectedBuffet: null } },
+  data() {
+    return { 
+      query: '',
+      buffets: [],
+      eventTypes: [],
+      selectedBuffet: null,
+      selectedEventType: null
+    }
+  },
+
   mounted() { this.fetchBuffets() },
 
   computed: { 
@@ -22,6 +31,21 @@ const app = Vue.createApp( {
       this.buffets = await(await fetch(`${API_URL}/buffets`)).json()
     },
 
+    async fetchEventTypes(buffet) {
+      this.eventTypes = await
+        (await fetch(`${API_URL}/buffets/${buffet.id}/event_types`)).json()
+    },
+
+    selectBuffet(index) {
+      this.selectedBuffet = this.buffets[index]
+      this.fetchEventTypes(this.selectedBuffet)
+    },
+
+    selectEventType(index) {
+      this.selectedEventType = this.eventTypes[index]
+      console.log(this.selectedEventType)
+    },
+
     getFullAddress(buffet) {
       return `${buffet.address} - ${buffet.district}, ${buffet.city} - 
               ${buffet.state}, ${buffet.cep.substring(0, 5)}-
@@ -36,9 +60,7 @@ const app = Vue.createApp( {
       return `(${phone.slice(0, 2)}) ${phone.slice(2, 6)}-${phone.slice(6, 10)}`
     },
 
-    selectBuffet(index) {
-      this.selectedBuffet = this.buffets[index]
-    }
+    zeroOneToText(value) { return value == 0 ? "Não" : "Sim" }
   }
 })
 

@@ -12,7 +12,6 @@
       <h2>Catálogo de Buffets</h2>
 
       <input type="text" v-model="query" placeholder="Digite o nome do Buffet para buscar">
-
       <p v-if="buffets.length <= 0">Nenhum Buffet encontrado!</p>
 
       <dl v-for="buffet, index in filteredBuffets">
@@ -22,12 +21,39 @@
       </dl>
     </div>
     
-    <div v-else>
+    <div v-if="selectedBuffet != null && selectedEventType == null">
       <h2>{{ selectedBuffet.brand_name }}</button></h2>
       <p>{{ selectedBuffet.description }}</p>
       <p>Telefone: {{ formatPhone(selectedBuffet.phone) }}</p>
       <p>Endereço: {{ getFullAddress(selectedBuffet) }}</p>
-      <button v-on:click="selectBuffet(null)">Voltar Para a Tela Inicial</button>
+
+      <div>
+        <h3>Tipos de Evento Oferecidos</button></h3>
+        <dl v-for="eventType, index in eventTypes">
+          <dt><button v-on:click="selectEventType(index)">{{ eventType.name }}</button></dt>
+          <dd>{{ eventType.description }}</dd>
+        </dl>
+      </div>
+      <p>{{ selectedEventType }}</p>
+    
+      <button v-on:click="selectedBuffet = null">Voltar Para a Tela Inicial</button>
+    </div>
+
+    <div v-if="selectedEventType != null">
+      <h2>{{ selectedEventType.name }}</h2>
+      <p>{{ selectedEventType.description }}</p>
+      <p>Mínimo de convidados: {{ selectedEventType.minimum_attendees }}</p>
+      <p>Máximo de convidados: {{ selectedEventType.maximum_attendees }}</p>
+      <p>Duração: {{ selectedEventType.duration }} minutos</p>
+      <h3>Cardápio</h3>
+      <p>{{ selectedEventType.menu }}</p>
+      <h3>Opções Adicionais</h3>
+      <p>Fornece Bebidas Alcoólicas: {{ zeroOneToText(selectedEventType.provides_alcohol_drinks) }}</p>
+      <p>Fornece Decoração: {{ zeroOneToText(selectedEventType.provides_decoration) }}</p>
+      <p>Fornece Serviço de Estacionamento: {{ zeroOneToText(selectedEventType.provides_parking_service) }}</p>
+      <p>Atende a Endereço Indicado por Cliente: {{ zeroOneToText(selectedEventType.serves_external_address) }}</p>
+
+      <button v-on:click="selectedEventType = null">Voltar Para o Buffet</button>
     </div>
   </div>
 
