@@ -31,7 +31,7 @@ Single Page Application to show data from Cadê Buffet API ([cade-buffet](https:
 
 You need the Cadê Buffet application to be running to consume its API.
 
-Check the `README.md` file on **[cade-buffet](https://github.com/ruliancruz/cade-buffet)** to see how to do it.
+Check the documentation on `README.md` file on **[cade-buffet](https://github.com/ruliancruz/cade-buffet)** to see how to do it.
 
 With the Cadê Buffet app running, all you'll need to do is open the `index.html` file in a web browser and start to use it!
 
