@@ -2,7 +2,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
   <title>Cadê Buffet</title>
 </head>
 <body>
@@ -37,7 +36,7 @@
       </div>
       <p>{{ selectedEventType }}</p>
     
-      <button v-on:click="selectedBuffet = null">Voltar Para a Tela Inicial</button>
+      <nav><button v-on:click="selectedBuffet = null">Voltar Para a Tela Inicial</button></nav>
     </div>
 
     <div v-if="selectedEventType != null">
@@ -68,8 +67,18 @@
           <dd>R${{ formatPrice(price.value) }}</dd>
         </dl>
       </div>
+      <p>{{ availableEvent }}</p>
+      <div v-if="availableEvent == false">
+        <p>O tipo de evento não está disponível para esta data!</p>
+      </div>
 
-      <button v-on:click="closeEventType()">Voltar Para o Buffet</button>
+      <div v-else>
+        <ul v-for="error in errors">
+          <p>Erro! {{ error }}</p>
+        </ul>
+      </div>
+
+      <nav><button v-on:click="closeEventType()">Voltar Para o Buffet</button></nav>
     </div>
   </div>
 

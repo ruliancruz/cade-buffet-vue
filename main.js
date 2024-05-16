@@ -14,7 +14,8 @@ const app = Vue.createApp( {
       attendeeQuantityField: null,
       availableEvent: null,
       prices: [],
-      message: null,
+      errors: [],
+      message: null
     }
   },
 
@@ -45,14 +46,18 @@ const app = Vue.createApp( {
 
     async checkEventAvailability() {
       result = await(await fetch(`${API_URL}/event_types/${this.selectedEventType.id}?date=${this.dateField}&attendee_quantity=${this.attendeeQuantityField}`)).json()
-
-      if(result.available == 1) {
-        this.availableEvent = true
-        this.prices = result.preview_prices
-      } else {
+      
+      if(result.available == 0) {
         this.availableEvent = false
         this.message = result.message
+      } else if (result.available == null || result.available == undefined) {
+        this.availableEvent = null
+      } else {
+        this.availableEvent = true
+        this.prices = result.preview_prices
       }
+
+      this.errors = result.errors
     },
 
     selectBuffet(index) {
