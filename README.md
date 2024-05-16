@@ -35,7 +35,7 @@ Check the `README.md` file on **[cade-buffet](https://github.com/ruliancruz/cade
 
 With the Cadê Buffet app running, all you'll need to do is open the `index.html` file in a web browser and start to use it!
 
-The default API URL is http://localhost:3000/, you can change it at `API_URL` on `/main.js`
+The default API URL is http://localhost:3000/, you can change it at `API_URL` on `main.js` file
 
 ## Development Progress
 
